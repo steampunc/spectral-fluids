@@ -69,10 +69,8 @@ def plotFFT(values):
     plt.colorbar(im, ax=ax)
     plt.show()
 
-df = pd.read_csv('cmake-build-debug/log.csv', sep=", ", engine="python") 
-df2 = pd.read_csv('cmake-build-debug/reverse.csv', sep=", ", engine="python") 
+df = pd.read_csv('cmake-build-debug/vx.csv', sep=", ", engine="python") 
+df2 = pd.read_csv('cmake-build-debug/vx1.csv', sep=", ", engine="python") 
 
 plotReal(df["in"])
-plotFFT(df["out_r"])
-plotFFT(df["out_mag"])
 plotReal(df2["in"])

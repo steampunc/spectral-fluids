@@ -19,7 +19,7 @@ public:
   double* get_in();
   double get_in(int x, int y, int z);
   fftw_complex* get_out();
-  double* get_out(int k, int l, int m);
+  fftw_complex* get_out(int k, int l, int m);
   int* get_dimensions();
   void save(char * filename);
   void normalize();

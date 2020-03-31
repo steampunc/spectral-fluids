@@ -25,35 +25,32 @@ static const double Z_RANGE = 2 * M_PI;
 
 int main() {
   // Defining datastructures for FFT
-  Data d = Data(Nx, Ny, Nz);
+  VectorField v = VectorField(Nx, Ny, Nz);
 
-  FFT3d f = FFT3d(&d);
+  FFT3d f = FFT3d(&v);
 
   // Initializing input data - initial conditions will go here
   for (int x = 0; x < Nx; x++) {
     for (int y = 0; y < Ny; y++) {
       for (int z = 0; z < Nz; z++) {
-        double tx = x * X_RANGE / Nx;
-        double ty = y * Y_RANGE / Ny;
-        double tz = z * Z_RANGE / Nz;
-
-        double v = 0;
-        if ((y == int(Ny / 3) && x == int(Nx / 3)) || (y == int(Ny * 2 / 3) &&  x == int(Nx * 2 / 3))) {
-                v = 1;
-        }
-
-        d.set_in(x, y, z, v);
+          double val[3] = {0, 0, 0};
+          if (x == int(Nx / 2)) {
+              std::cout << "HII" << std::endl;
+              val[0] = 1;
+              val[1] = 2;
+              val[2] = 3;
+          }
+          v.set_in(x, y, z, val);
       }
     }
   }
 
-
-
   f.forward();
 
-  d.save("log.csv");
+  v.save("vx.csv", "vy.csv", "vz.csv");
   f.backward();
-  d.normalize();
-  d.save("reverse.csv");
+
+  v.normalize();
+  v.save("vx1.csv", "vy1.csv", "vz1.csv");
   return 0;
 }

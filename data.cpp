@@ -2,6 +2,7 @@
 // Created by finn on 3/7/20.
 //
 
+#include <iostream>
 #include "data.h"
 
 Data::Data(int Nx, int Ny, int Nz) {
@@ -13,6 +14,7 @@ Data::Data(int Nx, int Ny, int Nz) {
 }
 
 Data::~Data() {
+    std::cout << "Removing scalar field." << std::endl;
     fftw_free(_in);
     fftw_free(_out);
 }
@@ -36,8 +38,8 @@ double Data::get_in(int x, int y, int z) {
 
 fftw_complex *Data::get_out() { return _out; }
 
-double *Data::get_out(int k, int l, int m) {
-    return _out[m + (_dimensions[2] / 2 + 1) * (l + _dimensions[1] * k)];
+fftw_complex *Data::get_out(int k, int l, int m) {
+    return &_out[m + (_dimensions[2] / 2 + 1) * (l + _dimensions[1] * k)];
 }
 
 int *Data::get_dimensions() { return _dimensions; }
