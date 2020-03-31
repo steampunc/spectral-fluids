@@ -24,9 +24,9 @@ public:
   void save(char * filename);
   void normalize();
 private:
-  double* _in;
-  fftw_complex* _out;
-  int _dimensions[3];
+  double* in_;
+  fftw_complex* out_;
+  int dimensions_[3];
 };
 
 #endif // SPECTRAL_C_TYPES_H

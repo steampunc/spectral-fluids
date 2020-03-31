@@ -22,8 +22,8 @@ public:
     void backward();
 
 private:
-    bool _vectorTransform;
-    fftw_plan _fPx, _fPy, _fPz, _bPx, _bPy, _bPz;
+    bool vectorTransform_;
+    fftw_plan fPx_, fPy_, fPz_, bPx_, bPy_, bPz_;
 };
 
 #endif // SPECTRAL_C_LIBRARY_H

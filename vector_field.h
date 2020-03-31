@@ -29,8 +29,8 @@ public:
     fftw_complex * get_out_y();
     fftw_complex * get_out_z();
 private:
-    Data* _data[3];
-    int _dimensions[3];
+    Data* data_[3];
+    int dimensions_[3];
 
 };
 

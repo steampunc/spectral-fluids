@@ -24,33 +24,33 @@ static const double Y_RANGE = 2 * M_PI;
 static const double Z_RANGE = 2 * M_PI;
 
 int main() {
-  // Defining datastructures for FFT
-  VectorField v = VectorField(Nx, Ny, Nz);
+    // Initializing relevant objects
+    // Velocity and its FFT plan
+    VectorField v = VectorField(Nx, Ny, Nz);
+    FFT3d f = FFT3d(&v);
 
-  FFT3d f = FFT3d(&v);
-
-  // Initializing input data - initial conditions will go here
-  for (int x = 0; x < Nx; x++) {
-    for (int y = 0; y < Ny; y++) {
-      for (int z = 0; z < Nz; z++) {
-          double val[3] = {0, 0, 0};
-          if (x == int(Nx / 2)) {
-              std::cout << "HII" << std::endl;
-              val[0] = 1;
-              val[1] = 2;
-              val[2] = 3;
-          }
-          v.set_in(x, y, z, val);
-      }
+    // Initializing input velocity field - initial conditions will go here
+    for (int x = 0; x < Nx; x++) {
+        for (int y = 0; y < Ny; y++) {
+            for (int z = 0; z < Nz; z++) {
+                double val[3] = {0, 0, 0};
+                if (x == int(Nx / 2)) {
+                    std::cout << "HII" << std::endl;
+                    val[0] = 1;
+                    val[1] = 2;
+                    val[2] = 3;
+                }
+                v.set_in(x, y, z, val);
+            }
+        }
     }
-  }
 
-  f.forward();
+    f.forward();
 
-  v.save("vx.csv", "vy.csv", "vz.csv");
-  f.backward();
+    v.save("vx.csv", "vy.csv", "vz.csv");
+    f.backward();
 
-  v.normalize();
-  v.save("vx1.csv", "vy1.csv", "vz1.csv");
-  return 0;
+    v.normalize();
+    v.save("vx1.csv", "vy1.csv", "vz1.csv");
+    return 0;
 }
